@@ -23,14 +23,21 @@ export default function ChatPage() {
 
         const chatList = CHAT_DATA[fetchChatListId as ChatListType];
 
-        if (segments[2] !== 'chat' || !fetchChatId || fetchChatId === '') {
+        if ((segments[2] !== 'chat' || !fetchChatId || fetchChatId === '') && segments[2] !== undefined) {
             const targetPath = `/${fetchChatListId}`;
-            if (location.pathname !== targetPath) {
-                navigate(targetPath, { replace: true });
-            }
+            if (location.pathname !== targetPath)
+                navigate(targetPath);
             setChatName('');
             setMessages(undefined);
             setMobileScreenListChat(true);
+            return;
+        }
+
+
+        if (!CHAT_LIST_IDS.includes(fetchChatListId as ChatListType)) {
+            if (location.pathname !== '/')
+                navigate('/');
+            setChatListId('');
             return;
         }
 
@@ -47,14 +54,6 @@ export default function ChatPage() {
             setChatName('');
             setMessages(undefined);
             setMobileScreenListChat(true);
-            return;
-        }
-
-        if (!CHAT_LIST_IDS.includes(fetchChatListId as ChatListType)) {
-            if (location.pathname !== '/') {
-                navigate('/', { replace: true });
-            }
-            setChatListId('');
             return;
         }
 
