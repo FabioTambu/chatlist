@@ -72,6 +72,7 @@ export default function ChatList(props: {onCardClick: (name: string) => void, na
                 <div className="chat-list__header__search">
                     <TextField
                         select
+                        color="success"
                         label="Select"
                         value={selected}
                         fullWidth
